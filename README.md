@@ -1,5 +1,9 @@
 # QuizWiz
 
+Jeffrey Chen and Vincent Fong
+
+Period 5
+
 ## Project Description:
 
 QuizWiz is a multiple choice trivia game that has both a single player and a multiplayer mode. In the single player mode, the player tries to answer as many questions correctly, attempting to climb the leaderboard. In the multiplayer mode, each player (on a different process) plays the quiz game together. The game waits until each player has submitted their response to reveal the answer, what each player chose, and move on to the next question. The player with the most amount of points at the end of the game wins.

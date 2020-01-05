@@ -10,4 +10,6 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-void getQuestion();
+void getQuestion(char *question);
+void soort(int arr[], int n);
+void getNQuestions(char *filename, int n);

@@ -10,6 +10,7 @@ struct question {
   int ans;
 };
 
+// given a line of questions.txt, creates a struct question type accordingly
 struct question parseSingleQuestion(char *line) {
   char delim[] = "|";
   struct question q;
@@ -22,6 +23,7 @@ struct question parseSingleQuestion(char *line) {
   return q;
 }
 
+// gets a questions.txt, retrieves n random questions from the file
 void getNQuestions(char *filename, int n) {
   // open file
   FILE *fp;
@@ -32,7 +34,7 @@ void getNQuestions(char *filename, int n) {
         return;
   }
 
-  // get number of questions
+  // get number of questions on the file in total
   int file_length = 0;
   char c;
   for (c = getc(fp); c != EOF; c = getc(fp)) {
@@ -41,6 +43,7 @@ void getNQuestions(char *filename, int n) {
   fclose(fp);
 
   // generate n unique random line numbers to get questions from
+  // oof for O(n^2)
   srand(time(NULL));
   int num_arr[n];
   for (int i = 0; i < n; i++) {
@@ -54,7 +57,7 @@ void getNQuestions(char *filename, int n) {
     }
   }
 
-  // sort the lines to get
+  // sort the indices from which to get questions from
   soort(num_arr, n);
 
   // populating the array of questtions appropiately
@@ -72,6 +75,7 @@ void getNQuestions(char *filename, int n) {
   fclose(fp);
 }
 
+// selection sorts an int array 
 void soort(int arr[], int n) {
   int a, i, j;
   for (i = 0; i < n; ++i) {

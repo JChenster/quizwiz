@@ -37,7 +37,7 @@ char ** getNQuestions(char *filename, int n){
     if (c == '\n') file_length++;
   }
   fclose(fp);
-  printf("file length: %d\n", file_length);
+  //printf("file length: %d\n", file_length);
 
   // generate n unique random line numbers to get questions from
   // oof for O(n^2)
@@ -98,8 +98,7 @@ void soort(int arr[], int n) {
   }
 }
 
-void printQuestions(char ** q){
-  int n = 3;
+void printQuestions(char ** q, int n){
   for (int i = 0; i<n; i++){
     struct question cur = parseSingleQuestion(q[i]);
     printQuestion(cur);
@@ -110,9 +109,30 @@ void printQuestion(struct question q){
   printf("%s\nA. %s\nB. %s\nC. %s\nD. %s\nAns: %d\n", q.question, q.a, q.b, q.c, q.d, q.ans);
 }
 
+int getMaxQuestions(char * filename){
+  FILE *fp;
+  char textqs[MAXCHAR];
+  fp = fopen(filename, "r");
+  if (fp == NULL) {
+    printf("Could not open file %s", filename);
+    return -1;
+  }
+
+  // get number of questions on the file in total
+  int file_length = 0;
+  char c;
+  for (c = getc(fp); c != EOF; c = getc(fp)) {
+    if (c == '\n') file_length++;
+  }
+  fclose(fp);
+  return file_length;
+}
+
+/*
 int main() {
   char *f = "questions.txt";
   int n = 3;
   char ** q = getNQuestions(f, n);
   printQuestions(q);
 }
+*/

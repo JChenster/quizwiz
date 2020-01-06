@@ -25,5 +25,6 @@ struct question {
 void getQuestion(char *question);
 void soort(int arr[], int n);
 char ** getNQuestions(char *filename, int n);
-void printQuestions(char ** q);
+void printQuestions(char ** q, int n);
 void printQuestion(struct question q);
+int getMaxQuestions(char * filename);

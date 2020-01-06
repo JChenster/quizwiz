@@ -11,6 +11,8 @@
 #include <sys/stat.h>
 #include <time.h>
 
+#define MAXCHAR 1000
+
 struct question {
   char * question;
   char * a;
@@ -22,6 +24,6 @@ struct question {
 
 void getQuestion(char *question);
 void soort(int arr[], int n);
-void getNQuestions(char *filename, int n, struct question ** q);
-void printQuestions(struct question q[]);
+struct question * getNQuestions(char *filename, int n);
+void printQuestions(struct question * q);
 void printQuestion(struct question q);

@@ -1,30 +1,33 @@
 #include "parse.h"
-#define MAXCHAR 1000
 
 // given a line of questions.txt, creates a struct question type accordingly
 struct question parseSingleQuestion(char *line) {
   char delim[] = "|";
   struct question q;
-  char * temp = malloc(sizeof(line));
+  // Makes sure original is not modified
+  char * temp = malloc(sizeof(line) - 1);
   strcpy(temp, line);
+  printf("temp: %s\n", temp);
   q.question = strtok(temp, delim);
-  q.a = strtok(0, delim);
-  q.b = strtok(0, delim);
-  q.c = strtok(0, delim);
-  q.d = strtok(0, delim);
+  q.a = strtok(NULL, delim);
+  q.b = strtok(NULL, delim);
+  q.c = strtok(NULL, delim);
+  q.d = strtok(NULL, delim);
   q.ans = atoi(strtok(0, delim));
+  free(temp);
+  printQuestion(q);
   return q;
 }
 
 // gets a questions.txt, retrieves n random questions from the file
-void getNQuestions(char *filename, int n, struct question ** q) {
+struct question * getNQuestions(char *filename, int n){
   // open file
   FILE *fp;
   char textqs[MAXCHAR];
   fp = fopen(filename, "r");
   if (fp == NULL) {
-        printf("Could not open file %s", filename);
-        return;
+    printf("Could not open file %s", filename);
+    return NULL;
   }
 
   // get number of questions on the file in total
@@ -43,11 +46,11 @@ void getNQuestions(char *filename, int n, struct question ** q) {
   for (int i = 0; i < n; i++) {
     num_arr[i] = rand() % (file_length);
     for (int j = 0; j < i; j++) {
-        if (num_arr[i] == num_arr[j]) {
-            num_arr[i] = rand() % (file_length);
-            i--;
-            break;
-        }
+      if (num_arr[i] == num_arr[j]) {
+        num_arr[i] = rand() % (file_length);
+        i--;
+        break;
+      }
     }
   }
 
@@ -55,21 +58,19 @@ void getNQuestions(char *filename, int n, struct question ** q) {
   soort(num_arr, n);
 
   // populating the array of questtions appropiately
-  struct question * temp = calloc(n, sizeof(struct question));
+  struct question * ans = calloc(n, sizeof(struct question));
   int ind = 0;
   char *que;
   fp = fopen(filename, "r");
   for (int i = 0; i < file_length && ind != n; i++) {
     que = fgets(textqs, MAXCHAR, fp); // fgets through file, line by line (i is the line it's currently at)
     if (num_arr[ind] == i) { // if the line is one of the random ones selected
-      printf("line %d: %s\n", i, que);
-      *(temp+ind) = parseSingleQuestion(que); // parse the question and add it to the array of questions
+      ans[ind] = parseSingleQuestion(que); // parse the question and add it to the array of questions
       ind++;
     }
   }
-  free(*q);
-  *q = temp;
   fclose(fp);
+  return ans;
 }
 
 // selection sorts an int array
@@ -86,9 +87,8 @@ void soort(int arr[], int n) {
   }
 }
 
-void printQuestions(struct question q[]){
-  int n = 2;
-  //printf("n is %d\n", n);
+void printQuestions(struct question * q){
+  int n = 3;
   for (int i = 0; i<n; i++){
     printQuestion(q[i]);
   }
@@ -100,7 +100,7 @@ void printQuestion(struct question q){
 
 int main() {
   char *f = "questions.txt";
-  struct question * q = calloc(2, sizeof(struct question));
-  getNQuestions(f, 2, &q);
+  int n = 3;
+  struct question * q = getNQuestions(f, n);
   printQuestions(q);
 }

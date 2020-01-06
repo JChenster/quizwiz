@@ -40,3 +40,17 @@ Algorithms:
   - Implement running interface that doesn’t move on to the next question until both players answer (Jeffrey)
   - Implement ability to see how other people respond and compare results (Vincent)
 - By Jan 17: Debug debug debug (Both)
+
+## Devlog
+### 1/3/2020
+- Jeffrey: created basic layout
+
+### 1/4/2020
+- Vincent: wrote parsing question method
+
+### 1/5/2020
+- Vincent: wrote getting N questions method, employs single parseQuestion method to get N questions from a formatted text file
+- Jeffrey: debugged this method b/c Vincent writes flawed code
+
+### 1/6/2020
+- Jeffrey: successfully figured out problems of N questions method :))

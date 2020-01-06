@@ -1,15 +1,6 @@
 #include "parse.h"
 #define MAXCHAR 1000
 
-struct question {
-  char * question;
-  char * a;
-  char * b;
-  char * c;
-  char * d;
-  int ans;
-};
-
 // given a line of questions.txt, creates a struct question type accordingly
 struct question parseSingleQuestion(char *line) {
   char delim[] = "|";
@@ -24,7 +15,7 @@ struct question parseSingleQuestion(char *line) {
 }
 
 // gets a questions.txt, retrieves n random questions from the file
-void getNQuestions(char *filename, int n) {
+void getNQuestions(char *filename, int n, struct question ** q) {
   // open file
   FILE *fp;
   char textqs[MAXCHAR];
@@ -61,21 +52,23 @@ void getNQuestions(char *filename, int n) {
   soort(num_arr, n);
 
   // populating the array of questtions appropiately
+  struct question * temp = calloc(n, sizeof(struct question));
   int ind = 0;
-  char *q;
+  char *que;
   fp = fopen(filename, "r");
-  struct question questions[n];
   for (int i = 0; i < file_length && ind != n; i++) {
-    q = fgets(textqs, MAXCHAR, fp); // fgets through file, line by line (i is the line it's currently at)
+    que = fgets(textqs, MAXCHAR, fp); // fgets through file, line by line (i is the line it's currently at)
     if (num_arr[ind] == i) { // if the line is one of the random ones selected
-      questions[ind] = parseSingleQuestion(q); // parse the question and add it to the array of questions
+      *(temp+ind) = parseSingleQuestion(que); // parse the question and add it to the array of questions
       ind++;
     }
   }
+  free(*q);
+  *q = temp;
   fclose(fp);
 }
 
-// selection sorts an int array 
+// selection sorts an int array
 void soort(int arr[], int n) {
   int a, i, j;
   for (i = 0; i < n; ++i) {
@@ -89,7 +82,21 @@ void soort(int arr[], int n) {
   }
 }
 
+void printQuestions(struct question q[]){
+  int n = 2;
+  //printf("n is %d\n", n);
+  for (int i = 0; i<n; i++){
+    printQuestion(q[i]);
+  }
+}
+
+void printQuestion(struct question q){
+  printf("%s\nA. %s\nB. %s\nC. %s\nD. %s\nAns: %d\n", q.question, q.a, q.b, q.c, q.d, q.ans);
+}
+
 int main() {
   char *f = "questions.txt";
-  getNQuestions(f, 2);
+  struct question * q = calloc(2, sizeof(struct question));
+  getNQuestions(f, 2, &q);
+  printQuestions(q);
 }

@@ -5,12 +5,14 @@
 struct question parseSingleQuestion(char *line) {
   char delim[] = "|";
   struct question q;
-  q.question = strtok(line, delim);
-  q.a = strtok(line, delim);
-  q.b = strtok(line, delim);
-  q.c = strtok(line, delim);
-  q.d = strtok(line, delim);
-  q.ans = atoi(strtok(line, delim));
+  char * temp = malloc(sizeof(line));
+  strcpy(temp, line);
+  q.question = strtok(temp, delim);
+  q.a = strtok(0, delim);
+  q.b = strtok(0, delim);
+  q.c = strtok(0, delim);
+  q.d = strtok(0, delim);
+  q.ans = atoi(strtok(0, delim));
   return q;
 }
 
@@ -32,6 +34,7 @@ void getNQuestions(char *filename, int n, struct question ** q) {
     if (c == '\n') file_length++;
   }
   fclose(fp);
+  printf("file length: %d\n", file_length);
 
   // generate n unique random line numbers to get questions from
   // oof for O(n^2)
@@ -59,6 +62,7 @@ void getNQuestions(char *filename, int n, struct question ** q) {
   for (int i = 0; i < file_length && ind != n; i++) {
     que = fgets(textqs, MAXCHAR, fp); // fgets through file, line by line (i is the line it's currently at)
     if (num_arr[ind] == i) { // if the line is one of the random ones selected
+      printf("line %d: %s\n", i, que);
       *(temp+ind) = parseSingleQuestion(que); // parse the question and add it to the array of questions
       ind++;
     }

@@ -7,7 +7,7 @@ struct question parseSingleQuestion(char *line) {
   // Makes sure original is not modified
   char * temp = malloc(sizeof(line) - 1);
   strcpy(temp, line);
-  printf("temp: %s\n", temp);
+  //printf("temp: %s\n", temp);
   q.question = strtok(temp, delim);
   q.a = strtok(NULL, delim);
   q.b = strtok(NULL, delim);
@@ -15,12 +15,12 @@ struct question parseSingleQuestion(char *line) {
   q.d = strtok(NULL, delim);
   q.ans = atoi(strtok(0, delim));
   free(temp);
-  printQuestion(q);
+  //printQuestion(q);
   return q;
 }
 
 // gets a questions.txt, retrieves n random questions from the file
-struct question * getNQuestions(char *filename, int n){
+char ** getNQuestions(char *filename, int n){
   // open file
   FILE *fp;
   char textqs[MAXCHAR];
@@ -58,14 +58,25 @@ struct question * getNQuestions(char *filename, int n){
   soort(num_arr, n);
 
   // populating the array of questtions appropiately
-  struct question * ans = calloc(n, sizeof(struct question));
+  char ** ans = calloc(n, sizeof(char *));
+  for (int i = 0; i < n; i++) {
+    ans[i] = malloc (MAXCHAR+ 1);
+    if (!ans[i]) {
+      free(ans);
+      return NULL;
+    }
+  }
+
   int ind = 0;
   char *que;
   fp = fopen(filename, "r");
   for (int i = 0; i < file_length && ind != n; i++) {
     que = fgets(textqs, MAXCHAR, fp); // fgets through file, line by line (i is the line it's currently at)
     if (num_arr[ind] == i) { // if the line is one of the random ones selected
-      ans[ind] = parseSingleQuestion(que); // parse the question and add it to the array of questions
+      //ans[ind] = parseSingleQuestion(que); // parse the question and add it to the array of questions
+      //printf("Testing the parse multiple questions:\n");
+      //printQuestion(ans[ind]);
+      strncpy(ans[ind], que, MAXCHAR);
       ind++;
     }
   }
@@ -87,10 +98,11 @@ void soort(int arr[], int n) {
   }
 }
 
-void printQuestions(struct question * q){
+void printQuestions(char ** q){
   int n = 3;
   for (int i = 0; i<n; i++){
-    printQuestion(q[i]);
+    struct question cur = parseSingleQuestion(q[i]);
+    printQuestion(cur);
   }
 }
 
@@ -101,6 +113,6 @@ void printQuestion(struct question q){
 int main() {
   char *f = "questions.txt";
   int n = 3;
-  struct question * q = getNQuestions(f, n);
+  char ** q = getNQuestions(f, n);
   printQuestions(q);
 }

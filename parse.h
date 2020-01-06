@@ -24,6 +24,6 @@ struct question {
 
 void getQuestion(char *question);
 void soort(int arr[], int n);
-struct question * getNQuestions(char *filename, int n);
-void printQuestions(struct question * q);
+char ** getNQuestions(char *filename, int n);
+void printQuestions(char ** q);
 void printQuestion(struct question q);

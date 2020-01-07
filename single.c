@@ -19,14 +19,16 @@ void game(){
   char ** q = getNQuestions(f, n);
   //printQuestions(q, n);
 
+  int response;
   for (int i = 0; i<n; i++){
     char * cur = q[i];
     struct question q = parseSingleQuestion(cur);
     printf("%d. %s\nA. %s\nB. %s\nC. %s\nD. %s\n", i + 1, q.question, q.a, q.b, q.c, q.d);
     printf("Enter answer: ");
-    fflush(stdout);
-    int response = getchar();
-    //printf("response: %s\n", response);
+    while ( ( response = getchar() ) != '\n' && response != EOF )
+      ;
+    response = getchar();
+    printf("response: %c\n", response);
     if ('a' + q.ans - 1 == response){
       printf("correct\n");
     }

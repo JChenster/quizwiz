@@ -2,4 +2,9 @@ How many objects are equivalent to one mole?|6.022 x 10^23|6.002 x 10^22|6.022 x
 What is the nickname for the US state Delaware?|The First State|The Fiftieth State|The Second State|The Sixteenth State|1
 Which ocean borders the west coast of the United States?|Pacific|Atlantic|Indian|Arctic|1
 What is the capital of the US state Nevada?|Las Vegas|Henderson|Carson City|Reno|3
-What is the nickname for the US state Delaware?|The Fiftieth State|The First State|The Second State|The Sixteenth State|2
+Which of these is the name of a song by Tears for Fears?|Scream|Yell|Shriek|Shout|4
+In which year was Constantinople conquered by the Turks?|1435|1453|1454|1440|2
+Ringo Starr of The Beatles mainly played what instrument?|Drums|Bass|Guitar|Piano|1
+What was the first Android version specifically optimized for tablets?|Eclair|Froyo|Honeycomb|Marshmellow|3
+How many planets make up our Solar System?|6|7|8|9|3
+Which of these musicals won the Tony Award for Best Musical?|The Color Purple|American Idiot|Newsies|Rent|4

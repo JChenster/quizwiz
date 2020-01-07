@@ -55,3 +55,6 @@ Algorithms:
 ### 1/6/2020
 - Jeffrey: successfully figured out problems of N questions method :))
 - Jeffrey: wrote single.c and it's mostly done but it needs to be debugged
+
+### 1/7/2020
+- Jeffrey: debugged single.c, randomized question order

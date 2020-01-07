@@ -41,6 +41,7 @@ void game(){
     }
     else{
       printf("Incorrect! Game over! Your score is %d\n", score);
+      break;
     }
   }
 }

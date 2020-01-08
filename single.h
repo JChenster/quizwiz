@@ -10,4 +10,4 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-void game();
+int game(char * f, int n);

@@ -51,3 +51,24 @@ int game(char * f, int n){
   }
   return score;
 }
+
+int viewLeaderboard(){
+  fd = open("leaderboard.txt", O_RDONLY);
+  if (fd == -1){
+    printf("error %d: %s\n", errno, strerror(errno));
+    return -1;
+  }
+  printf("Leaderboard:\n");
+  char buff[SEG_SIZE];
+  buff[0] = '\0';
+  read(fd, buff, SEG_SIZE);
+  if (strlen(buff) != 0) {
+    *(strrchr(buff, '\n') + 1) = '\0';
+  }
+  printf("%s\n",buff);
+  close(fd);
+}
+
+int updateLeaderboard(char * username, int score){
+  
+}

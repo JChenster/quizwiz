@@ -11,3 +11,5 @@
 #include <sys/stat.h>
 
 int game(char * f, int n);
+int viewLeaderboard();
+int updateLeaderboard(char * username, int score);

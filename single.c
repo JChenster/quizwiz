@@ -6,11 +6,10 @@ int main(){
   printf("Welcome to the single player QuizWiz mode!\n");
   printf("-----------------------------------------\n");
 
-  char *f = "questions.txt";
+  f = "questions.txt";
 
   // Receive username
   printf("Enter username: ");
-  char username[16];
   fgets(username, 16, stdin);
   username[strlen(username)-1] = '\0';
   printf("Welcome %s!\n", username);
@@ -26,14 +25,14 @@ int main(){
   printf("Enter number of questions desired: ");
   char input[8];
   fgets(input, 8, stdin);
-  int n = atoi(input);
+  n = atoi(input);
   printf("n is %d\n", n);
-  game(f, n);
+  score = game();
   viewLeaderboard();
   removeSemaphore();
 }
 
-int game(char * f, int n){
+int game(){
   char ** q = getNQuestions(f, n);
   int response;
   int score = 0;
@@ -108,5 +107,21 @@ int viewLeaderboard(){
 }
 
 int updateLeaderboard(char * username, int score){
+  printf("trying to get in\n");
+  semd = semget(SEMKEY, 1, 0);
+  if (semd == -1) {
+    printf("error %d: %s\n", errno, strerror(errno));
+    return -1;
+  }
+  semop(semd, &sb, 1);
+
+  fd = open("leaderboard.txt", O_WRONLY | O_APPEND);
+  char new[100];
+  sprintf(new, "%s\t\t%d\t", username, score);
+  write(fd, new, strlen(new));
+  close(fd);
+
+  sb.sem_op = 1;
+  semop(semd, &sb, 1);
   return 0;
 }

@@ -46,8 +46,8 @@ int game(char * f, int n){
     printf("%d. %s\nA. %s\nB. %s\nC. %s\nD. %s\n", i + 1, q.question, q.a, q.b, q.c, q.d);
 
     // receive and parse response
-    while ( ( response = getchar() ) != '\n' && response != EOF )
-      ;
+    //while ( ( response = getchar() ) != '\n' && response != EOF )
+    //  ;
     printf("Enter answer: ");
     response = getchar();
     if ('a' + q.ans - 1 == response || 'A' + q.ans - 1 == response){

@@ -11,11 +11,11 @@
 #include <sys/stat.h>
 
 #define SEMKEY 24601
-int semd, fd, n, score;
+int semd, fd;
 struct sembuf sb;
 union semun us;
 char username[16];
-char * f;
+char * f = "questions.txt";
 
 union semun {
   int              val;    /* Value for SETVAL */
@@ -25,7 +25,7 @@ union semun {
                               (Linux-specific) */
 };
 
-int game();
+int game(int n);
 int createSemaphore();
 int removeSemaphore();
 int viewLeaderboard();

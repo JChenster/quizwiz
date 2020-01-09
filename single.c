@@ -6,9 +6,8 @@ int main(){
   printf("Welcome to the single player QuizWiz mode!\n");
   printf("-----------------------------------------\n");
 
-  f = "questions.txt";
-
   // Receive username
+  char username[16];
   printf("Enter username: ");
   fgets(username, 16, stdin);
   username[strlen(username)-1] = '\0';
@@ -25,16 +24,15 @@ int main(){
   printf("Enter number of questions desired: ");
   char input[8];
   fgets(input, 8, stdin);
-  n = atoi(input);
-  printf("n is %d\n", n);
-  score = game();
+  int n = atoi(input);
+  int score = game(n);
   viewLeaderboard();
-  updateLeaderboard();
+  updateLeaderboard(username, score);
   viewLeaderboard();
   removeSemaphore();
 }
 
-int game(){
+int game(int n){
   char ** q = getNQuestions(f, n);
   int response;
   int score = 0;

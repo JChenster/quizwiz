@@ -19,7 +19,7 @@ struct question parseSingleQuestion(char *line) {
   strncpy(q.c, strtok(NULL, delim), 16);
   strncpy(q.d, strtok(NULL, delim), 16);
   q.ans = atoi(strtok(0, delim));
-  free(temp);
+  //free(temp);
   //printQuestion(q);
   return q;
 }

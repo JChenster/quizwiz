@@ -99,7 +99,8 @@ int viewLeaderboard(){
   int size = atoi(temp);
   printf("size: %d\n", size);
   */
-  char buff[1000];
+  int size = 1000;
+  char buff[size];
   buff[0] = '\0';
   read(fd, buff, size);
   if (strlen(buff) != 0) {

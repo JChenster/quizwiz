@@ -30,3 +30,4 @@ int createSemaphore();
 int removeSemaphore();
 int viewLeaderboard();
 int updateLeaderboard(char * username, int score);
+int resetLeaderboard();

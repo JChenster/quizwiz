@@ -26,6 +26,7 @@ int main(){
   fgets(input, 8, stdin);
   int n = atoi(input);
   int score = game(n);
+  resetLeaderboard();
   viewLeaderboard();
   updateLeaderboard(username, score);
   viewLeaderboard();
@@ -128,5 +129,18 @@ int updateLeaderboard(char * username, int score){
 
   sb.sem_op = 1;
   semop(semd, &sb, 1);
+  return 0;
+}
+
+int resetLeaderboard(){
+  printf("Resetting leaderboard...\n");
+  remove("leaderboard.txt");
+  int fd = open("semaphone.txt", O_CREAT | O_TRUNC | O_RDWR, 0644);
+  if (fd == -1){
+    printf("error %d: %s\n", errno, strerror(errno));
+    return -1;
+  }
+  close(fd);
+  printf("Success!\n");
   return 0;
 }

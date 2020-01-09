@@ -14,7 +14,6 @@
 #define SEMKEY 24601
 int semd, fd;
 struct sembuf sb;
-union semun us;
 
 int game(char * f, int n);
 /*

@@ -26,8 +26,8 @@ int main(){
   // receive input of number of questions desired
   printf("There are currently %d questions in the database\n", getMaxQuestions(f));
   printf("Enter number of questions desired: ");
-  char input[2];
-  fgets(input, 2, stdin);
+  char input[8];
+  fgets(input, 8, stdin);
   int n = atoi(input);
   game(f, n);
   //viewLeaderboard();

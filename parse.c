@@ -10,6 +10,7 @@ struct question parseSingleQuestion(char *line) {
   q.question = strtok(temp, delim);
   strcpy(q.question, temp);
   printf("temp : %s\n", temp);
+  printf("question : %s\n", q.question);
   q.a = strtok(NULL, delim);
   q.b = strtok(NULL, delim);
   q.c = strtok(NULL, delim);

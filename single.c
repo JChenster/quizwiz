@@ -29,8 +29,8 @@ int main(){
   int n = atoi(input);
   printf("n is %d\n", n);
   game(f, n);
+  viewLeaderboard();
   removeSemaphore();
-  //viewLeaderboard();
 }
 
 int game(char * f, int n){

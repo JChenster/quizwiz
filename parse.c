@@ -5,7 +5,6 @@ struct question parseSingleQuestion(char *line) {
   char delim[] = "|";
   struct question q;
   // Makes sure original is not modified
-  printf("size of question: %lu\n", sizeof(q.question));
   char temp[132];
   strncpy(temp, line, 132);
   char temp2[64];

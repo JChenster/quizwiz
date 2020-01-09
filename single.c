@@ -27,9 +27,8 @@ int main(){
   int n = atoi(input);
   int score = game(n);
   viewLeaderboard();
-  printf("got here\n");
-  updateLeaderboard(username, score);
-  viewLeaderboard();
+  //updateLeaderboard(username, score);
+  //viewLeaderboard();
   removeSemaphore();
 }
 
@@ -94,7 +93,9 @@ int viewLeaderboard(){
 
   struct stat md;
   stat("leaderboard.txt", &md);
-  int size = md.st_size;
+  char temp[8];
+  sprintf(temp, "%lld", md.st_size);
+  int size = atoi(temp);
   printf("size: %d\n", size);
   char buff[size];
   buff[0] = '\0';

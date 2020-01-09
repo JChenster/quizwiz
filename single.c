@@ -29,6 +29,7 @@ int main(){
   int n = atoi(input);
   printf("n is %d\n", n);
   game(f, n);
+  removeSemaphore();
   //viewLeaderboard();
 }
 
@@ -71,6 +72,17 @@ int createSemaphore(){
   semctl(semd, 0, SETVAL, us);
   printf("semaphore created\n");
   return 0;
+}
+
+int removeSemaphore(){
+  semd = semget(SEMKEY, 1, 0);
+  if (semd == -1) {
+    printf("error %d: %s\n", errno, strerror(errno));
+    return -1;
+  }
+  semop(semd, &sb, 1);
+  semctl(semd, IPC_RMID, 0);
+  printf("semaphore removed\n");
 }
 
 int viewLeaderboard(){

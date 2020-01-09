@@ -41,7 +41,6 @@ int game(int n){
     char * cur = q[i];
     //struct question q = parseSingleQuestion(cur);
     struct question q = parseSingleQuestion(cur);
-    printf("question : %s\n", q.question);
     printf("-----------------------------------------\n");
     printf("%d. %s\nA. %s\nB. %s\nC. %s\nD. %s\n", i + 1, q.question, q.a, q.b, q.c, q.d);
 
@@ -117,8 +116,8 @@ int updateLeaderboard(char * username, int score){
 
   fd = open("leaderboard.txt", O_WRONLY | O_APPEND);
   char new[100];
-  sprintf(new, "%s\t\t%d\t", username, score);
-  write(fd, new, strlen(new));
+  int written = sprintf(new, "%s\t\t%d\t", username, score);
+  write(fd, new, written);
   close(fd);
 
   sb.sem_op = 1;

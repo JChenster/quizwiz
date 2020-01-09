@@ -15,6 +15,12 @@ int main(){
   username[strlen(username)-1] = '\0';
   printf("Welcome %s!\n", username);
 
+  // Sets up semaphores
+  us.val = 1;
+  sb.sem_num = 0;
+  sb.sem_op = -1;
+  createSemaphore();
+
   // receive input of number of questions desired
   printf("There are currently %d questions in the database\n", getMaxQuestions(f));
   printf("Enter number of questions desired: ");
@@ -22,6 +28,7 @@ int main(){
   fgets(input, 2, stdin);
   int n = atoi(input);
   game(f, n);
+  viewLeaderboard();
 }
 
 int game(char * f, int n){
@@ -52,6 +59,16 @@ int game(char * f, int n){
   return score;
 }
 
+int createSemaphore(){
+  semd = semget(SEMKEY, 1, IPC_CREAT | IPC_EXCL | 0644);
+  if (semd == -1) {
+    printf("error %d: %s\n", errno, strerror(errno));
+    return -1;
+  }
+  semctl(semd, 0, SETVAL, us);
+  printf("semaphore created\n");
+}
+
 int viewLeaderboard(){
   fd = open("leaderboard.txt", O_RDONLY);
   if (fd == -1){
@@ -59,9 +76,13 @@ int viewLeaderboard(){
     return -1;
   }
   printf("Leaderboard:\n");
-  char buff[SEG_SIZE];
+
+  struct stat md;
+  stat("leaderboard.txt", &md);
+  int size = md.st_size;
+  char buff[size];
   buff[0] = '\0';
-  read(fd, buff, SEG_SIZE);
+  read(fd, buff, size);
   if (strlen(buff) != 0) {
     *(strrchr(buff, '\n') + 1) = '\0';
   }
@@ -70,5 +91,5 @@ int viewLeaderboard(){
 }
 
 int updateLeaderboard(char * username, int score){
-  
+  return 0;
 }

@@ -17,6 +17,8 @@ struct sembuf sb;
 union semun us;
 
 int game(char * f, int n);
+/*
 int createSemaphore();
 int viewLeaderboard();
 int updateLeaderboard(char * username, int score);
+*/

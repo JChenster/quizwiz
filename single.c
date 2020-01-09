@@ -63,7 +63,7 @@ int game(char * f, int n){
   }
   return score;
 }
-
+/*
 int createSemaphore(){
   semd = semget(SEMKEY, 1, IPC_CREAT | IPC_EXCL | 0644);
   if (semd == -1) {
@@ -100,3 +100,4 @@ int viewLeaderboard(){
 int updateLeaderboard(char * username, int score){
   return 0;
 }
+*/

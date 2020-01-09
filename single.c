@@ -85,7 +85,7 @@ int removeSemaphore(){
 }
 
 int viewLeaderboard(){
-  fd = open("leaderboard.txt", O_RDONLY);
+  int fd = open("leaderboard.txt", O_RDONLY);
   if (fd == -1){
     printf("error %d: %s\n", errno, strerror(errno));
     return -1;
@@ -115,7 +115,7 @@ int updateLeaderboard(char * username, int score){
   }
   semop(semd, &sb, 1);
 
-  fd = open("leaderboard.txt", O_WRONLY | O_APPEND);
+  int fd = open("leaderboard.txt", O_WRONLY | O_APPEND);
   char new[100];
   int written = sprintf(new, "%s\t\t%d\t", username, score);
   write(fd, new, written);

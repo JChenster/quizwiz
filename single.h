@@ -11,7 +11,7 @@
 #include <sys/stat.h>
 
 #define SEMKEY 24601
-int semd, fd;
+int semd;
 struct sembuf sb;
 union semun us;
 char username[16];

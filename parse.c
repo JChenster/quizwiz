@@ -5,6 +5,7 @@ struct question parseSingleQuestion(char *line) {
   char delim[] = "|";
   struct question q;
   // Makes sure original is not modified
+  printf("size of question: %lu\n", sizeof(q.question));
   char * temp = malloc(sizeof(line) - 1);
   strcpy(temp, line);
   q.question = strtok(temp, delim);

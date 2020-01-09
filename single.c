@@ -15,11 +15,13 @@ int main(){
   username[strlen(username)-1] = '\0';
   printf("Welcome %s!\n", username);
 
+  /*
   // Sets up semaphores
   us.val = 1;
   sb.sem_num = 0;
   sb.sem_op = -1;
   createSemaphore();
+  */
 
   // receive input of number of questions desired
   printf("There are currently %d questions in the database\n", getMaxQuestions(f));
@@ -28,7 +30,7 @@ int main(){
   fgets(input, 2, stdin);
   int n = atoi(input);
   game(f, n);
-  viewLeaderboard();
+  //viewLeaderboard();
 }
 
 int game(char * f, int n){

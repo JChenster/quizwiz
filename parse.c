@@ -9,7 +9,8 @@ struct question parseSingleQuestion(char *line) {
   strcpy(temp, line);
   char * temp2 = malloc(sizeof(line) - 1);
   temp2 = strtok(temp, delim);
-  q.question = temp;
+  strncpy(q.question, temp2);
+  printf("temp : %s\n", temp);
   q.a = strtok(NULL, delim);
   q.b = strtok(NULL, delim);
   q.c = strtok(NULL, delim);

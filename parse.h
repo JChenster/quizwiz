@@ -14,11 +14,11 @@
 #define MAXCHAR 1000
 
 struct question {
-  char * question;
-  char * a;
-  char * b;
-  char * c;
-  char * d;
+  char question[64];
+  char a [16];
+  char b [16];
+  char c [16];
+  char d [16];
   int ans;
 };
 

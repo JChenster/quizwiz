@@ -6,17 +6,18 @@ struct question parseSingleQuestion(char *line) {
   struct question q;
   // Makes sure original is not modified
   printf("size of question: %lu\n", sizeof(q.question));
-  char * temp = malloc(sizeof(line) - 1);
-  strcpy(temp, line);
-  q.question = strtok(temp, delim);
-  strcpy(q.question, temp);
+  char temp[130];
+  strncpy(temp, line, 130);
+  char temp2[64];
+  strncpy(temp2, strtok(temp, delim), 64);
+  strncpy(q.question, temp2, 64);
   printf("size of question: %lu\n", sizeof(q.question));
   printf("temp : %s\n", temp);
   printf("question : %s\n", q.question);
-  q.a = strtok(NULL, delim);
-  q.b = strtok(NULL, delim);
-  q.c = strtok(NULL, delim);
-  q.d = strtok(NULL, delim);
+  strncpy(q.a, strtok(NULL, delim), 16);
+  strncpy(q.b, strtok(NULL, delim), 16);
+  strncpy(q.c, strtok(NULL, delim), 16);
+  strncpy(q.d, strtok(NULL, delim), 16);
   q.ans = atoi(strtok(0, delim));
   free(temp);
   //printQuestion(q);

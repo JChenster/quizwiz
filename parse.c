@@ -11,17 +11,11 @@ struct question parseSingleQuestion(char *line) {
   char temp2[64];
   strncpy(temp2, strtok(temp, delim), 64);
   strncpy(q.question, temp2, 64);
-  printf("size of question: %lu\n", sizeof(q.question));
-  printf("temp : %s\n", temp);
-  printf("question : %s\n", q.question);
   strncpy(q.a, strtok(NULL, delim), 16);
   strncpy(q.b, strtok(NULL, delim), 16);
   strncpy(q.c, strtok(NULL, delim), 16);
   strncpy(q.d, strtok(NULL, delim), 16);
   q.ans = atoi(strtok(0, delim));
-  //free(temp);
-  //printQuestion(q);
-  //printf("got here\n");
   return q;
 }
 

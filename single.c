@@ -27,6 +27,7 @@ int main(){
   int n = atoi(input);
   int score = game(n);
   viewLeaderboard();
+  printf("got here\n");
   updateLeaderboard(username, score);
   viewLeaderboard();
   removeSemaphore();

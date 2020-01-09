@@ -135,7 +135,7 @@ int updateLeaderboard(char * username, int score){
 int resetLeaderboard(){
   printf("Resetting leaderboard...\n");
   remove("leaderboard.txt");
-  int fd = open("semaphone.txt", O_CREAT | O_TRUNC | O_RDWR, 0644);
+  int fd = open("leaderboard.txt", O_CREAT | O_TRUNC | O_RDWR, 0644);
   if (fd == -1){
     printf("error %d: %s\n", errno, strerror(errno));
     return -1;

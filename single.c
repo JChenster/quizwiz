@@ -122,7 +122,7 @@ int updateLeaderboard(char * username, int score){
 
   int fd = open("leaderboard.txt", O_WRONLY | O_APPEND);
   char new[100];
-  int written = sprintf(new, "%s\t\t%d\t", username, score);
+  int written = sprintf(new, "%s\t\t%d\n", username, score);
   write(fd, new, written);
   close(fd);
 

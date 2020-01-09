@@ -29,6 +29,8 @@ int main(){
   printf("n is %d\n", n);
   score = game();
   viewLeaderboard();
+  updateLeaderboard();
+  viewLeaderboard();
   removeSemaphore();
 }
 

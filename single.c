@@ -26,7 +26,7 @@ int main(){
   fgets(input, 8, stdin);
   int n = atoi(input);
   int score = game(n);
-  //resetLeaderboard();
+  resetLeaderboard();
   viewLeaderboard();
   updateLeaderboard(username, score);
   viewLeaderboard();
@@ -40,7 +40,6 @@ int game(int n){
   for (int i = 0; i<n; i++){
     // parse current question
     char * cur = q[i];
-    //struct question q = parseSingleQuestion(cur);
     struct question q = parseSingleQuestion(cur);
     printf("-----------------------------------------\n");
     printf("%d. %s\nA. %s\nB. %s\nC. %s\nD. %s\n", i + 1, q.question, q.a, q.b, q.c, q.d);
@@ -104,11 +103,6 @@ int viewLeaderboard(){
   char buff[size];
   buff[0] = '\0';
   read(fd, buff, size);
-  /*
-  if (strlen(buff) != 0) {
-    *(strrchr(buff, '\n') + 1) = '\0';
-  }
-  */
   printf("%s\n",buff);
   close(fd);
   return 0;

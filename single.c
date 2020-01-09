@@ -41,6 +41,7 @@ int game(char * f, int n){
   for (int i = 0; i<n; i++){
     // parse current question
     char * cur = q[i];
+    //struct question q = parseSingleQuestion(cur);
     struct question q = parseSingleQuestion(cur);
     printf("question : %s\n", q.question);
     printf("-----------------------------------------\n");
@@ -71,6 +72,7 @@ int createSemaphore(){
   }
   semctl(semd, 0, SETVAL, us);
   printf("semaphore created\n");
+  return 0;
 }
 
 int viewLeaderboard(){
@@ -92,6 +94,7 @@ int viewLeaderboard(){
   }
   printf("%s\n",buff);
   close(fd);
+  return 0;
 }
 
 int updateLeaderboard(char * username, int score){

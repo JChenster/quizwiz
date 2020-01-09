@@ -39,10 +39,6 @@ int game(char * f, int n){
   int response;
   int score = 0;
   for (int i = 0; i<n; i++){
-    // clear input buffer
-    while ( ( response = getchar() ) != '\n' && response != EOF )
-      ;
-
     // parse current question
     char * cur = q[i];
     struct question q = parseSingleQuestion(cur);
@@ -50,6 +46,8 @@ int game(char * f, int n){
     printf("%d. %s\nA. %s\nB. %s\nC. %s\nD. %s\n", i + 1, q.question, q.a, q.b, q.c, q.d);
 
     // receive and parse response
+    while ( ( response = getchar() ) != '\n' && response != EOF )
+      ;
     printf("Enter answer: ");
     response = getchar();
     if ('a' + q.ans - 1 == response || 'A' + q.ans - 1 == response){

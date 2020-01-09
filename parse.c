@@ -21,6 +21,7 @@ struct question parseSingleQuestion(char *line) {
   q.ans = atoi(strtok(0, delim));
   //free(temp);
   //printQuestion(q);
+  printf("got here\n");
   return q;
 }
 

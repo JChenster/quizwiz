@@ -58,3 +58,6 @@ Algorithms:
 
 ### 1/7/2020
 - Jeffrey: debugged single.c, randomized question order
+
+### 1/8/2020
+- Jeffrey: debugged single.c for Linux, wrote basic leaderboard abilities, still need to debug some minor things but otherwise it's good!

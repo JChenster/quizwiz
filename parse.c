@@ -7,7 +7,8 @@ struct question parseSingleQuestion(char *line) {
   // Makes sure original is not modified
   char * temp = malloc(sizeof(line) - 1);
   strcpy(temp, line);
-  strtok(temp, delim);
+  char * temp2 = malloc(sizeof(line) - 1);
+  temp2 = strtok(temp, delim);
   q.question = temp;
   q.a = strtok(NULL, delim);
   q.b = strtok(NULL, delim);

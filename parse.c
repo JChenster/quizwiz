@@ -5,15 +5,15 @@ struct question parseSingleQuestion(char *line) {
   char delim[] = "|";
   struct question q;
   // Makes sure original is not modified
-  char temp[132];
-  strncpy(temp, line, 132);
-  char temp2[64];
-  strncpy(temp2, strtok(temp, delim), 64);
-  strncpy(q.question, temp2, 64);
-  strncpy(q.a, strtok(NULL, delim), 16);
-  strncpy(q.b, strtok(NULL, delim), 16);
-  strncpy(q.c, strtok(NULL, delim), 16);
-  strncpy(q.d, strtok(NULL, delim), 16);
+  char temp[260];
+  strncpy(temp, line, 260);
+  char temp2[128];
+  strncpy(temp2, strtok(temp, delim), 128);
+  strncpy(q.question, temp2, 128);
+  strncpy(q.a, strtok(NULL, delim), 32);
+  strncpy(q.b, strtok(NULL, delim), 32);
+  strncpy(q.c, strtok(NULL, delim), 32);
+  strncpy(q.d, strtok(NULL, delim), 32);
   q.ans = atoi(strtok(0, delim));
   return q;
 }

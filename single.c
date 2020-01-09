@@ -95,6 +95,7 @@ int viewLeaderboard(){
   struct stat md;
   stat("leaderboard.txt", &md);
   int size = md.st_size;
+  printf("size: %d\n", size);
   char buff[size];
   buff[0] = '\0';
   read(fd, buff, size);

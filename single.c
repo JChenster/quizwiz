@@ -42,6 +42,7 @@ int game(char * f, int n){
     // parse current question
     char * cur = q[i];
     struct question q = parseSingleQuestion(cur);
+    printf("question : %s\n", q.question);
     printf("-----------------------------------------\n");
     printf("%d. %s\nA. %s\nB. %s\nC. %s\nD. %s\n", i + 1, q.question, q.a, q.b, q.c, q.d);
 

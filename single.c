@@ -124,12 +124,42 @@ int updateLeaderboard(char * username, int score){
   }
   semop(semd, &sb, 1);
 
+  char * filename = "leaderboard.txt";
+  int file_length = getMaxQuestions(filename);
+
+  // opens file
+  FILE *fp;
+  char textqs[MAXCHAR];
+  fp = fopen(filename, "r");
+  if (fp == NULL) {
+    printf("Could not open file %s", filename);
+    return -1;
+  }
+
+  char * entry;
+  char delim[] = "\t\t";
+  char * cur_user;
+  for (int i = 0; i < file_length; i++) {
+    entry = fgets(textqs, MAXCHAR, fp);
+    char temp[MAXCHAR];
+    strncpy(temp, entry, MAXCHAR);
+    char temp2[16];
+    strncpy(temp2, strtok(temp, delim), 16);
+    strncpy(cur_user, temp2, 16);
+    int cur_score = atoi(strtok(0, delim));
+    printf("cur user: %s\ncur score: %d\n", cur_user, cur_score);
+  }
+
+  /*
   int fd = open("leaderboard.txt", O_WRONLY | O_APPEND);
   char new[100];
   int written = sprintf(new, "%s\t\t%d\n", username, score);
   write(fd, new, written);
   close(fd);
+  */
 
+  // closes file and reopens semaphore
+  fclose(fp);
   sb.sem_op = 1;
   semop(semd, &sb, 1);
   return 0;

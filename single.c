@@ -84,6 +84,8 @@ int removeSemaphore(){
 }
 
 int viewLeaderboard(){
+
+  // opens file
   int fd = open("leaderboard.txt", O_RDONLY);
   if (fd == -1){
     printf("error %d: %s\n", errno, strerror(errno));
@@ -99,10 +101,12 @@ int viewLeaderboard(){
   int size = atoi(temp);
   printf("size: %d\n", size);
   */
+  // reads the contents of the file
   int size = 1000;
   char buff[size];
-  //buff[0] = '\0';
   read(fd, buff, size);
+
+  // removes weird stuff at the end
   if (strlen(buff) != 0) {
     *(strrchr(buff, '\n') + 1) = '\0';
   }

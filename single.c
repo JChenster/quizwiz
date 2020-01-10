@@ -103,6 +103,9 @@ int viewLeaderboard(){
   char buff[size];
   //buff[0] = '\0';
   read(fd, buff, size);
+  if (strlen(buff) != 0) {
+    *(strrchr(buff, '\n') + 1) = '\0';
+  }
   printf("%s\n",buff);
   close(fd);
   return 0;

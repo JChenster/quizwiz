@@ -61,3 +61,6 @@ Algorithms:
 
 ### 1/8/2020
 - Jeffrey: debugged single.c for Linux, wrote basic leaderboard abilities, still need to debug some minor things but otherwise it's good!
+
+### 1/9/2020
+- Jeffrey: finished debugging single.c

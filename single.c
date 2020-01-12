@@ -149,7 +149,6 @@ int updateLeaderboard(char * username, int score){
   }
   else{
     // opens file
-    printf("got here\n");
     FILE *fp;
     char textqs[MAXCHAR];
     fp = fopen(filename, "r");
@@ -173,7 +172,7 @@ int updateLeaderboard(char * username, int score){
       //printf("%s : %d\n", cur_user, cur_score);
 
       // if score to add is greater than current score
-      if (score > cur_score){
+      if (score > cur_score && last){
         char new[100];
         int written = sprintf(new, "%s\t\t%d\n", username, score);
         write(fd, new, written);

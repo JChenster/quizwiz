@@ -27,7 +27,7 @@ int main(){
   int n = atoi(input);
   int score = game(n);
   //resetLeaderboard();
-  viewLeaderboard();
+  //viewLeaderboard();
   updateLeaderboard(username, score);
   viewLeaderboard();
   removeSemaphore();

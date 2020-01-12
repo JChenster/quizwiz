@@ -161,6 +161,7 @@ int updateLeaderboard(char * username, int score){
     char * entry;
     char delim[] = "\t\t";
     char * cur_user;
+    printf("got here part 2\n");
     for (int i = 0; i < file_length; i++) {
       // obtains username and score of player line by line
       entry = fgets(textqs, MAXCHAR, fp);

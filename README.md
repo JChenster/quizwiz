@@ -67,3 +67,6 @@ Algorithms:
 
 ### 1/10/2020
 - Jeffrey: started writing sorting for leaderboard
+
+### 1/12/2020
+- Jeffrey: successfully completed and debugged leaderboard sorting. Single player should be all done now!

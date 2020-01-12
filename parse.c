@@ -53,17 +53,6 @@ char ** getNQuestions(char *filename, int n){
     }
   }
 
-  /*
-  printf("num_arr: [");
-  for (int ind = 0; ind<n; ind++){
-    printf(" %d,", num_arr[ind]);
-  }
-  printf("]\n");
-  */
-
-  // sort the indices from which to get questions from
-  // soort(num_arr, n);
-
   // populating the array of questtions appropiately
   char ** ans = calloc(n, sizeof(char *));
   for (int i = 0; i < n; i++) {
@@ -74,21 +63,10 @@ char ** getNQuestions(char *filename, int n){
     }
   }
 
-  //int ind = 0;
   char *que;
   fp = fopen(filename, "r");
-  //for (int i = 0; i < file_length && ind != n; i++) {
   for (int i = 0; i < file_length; i++) {
     que = fgets(textqs, MAXCHAR, fp); // fgets through file, line by line (i is the line it's currently at)
-    /*
-    if (num_arr[ind] == i) { // if the line is one of the random ones selected
-      //ans[ind] = parseSingleQuestion(que); // parse the question and add it to the array of questions
-      //printf("Testing the parse multiple questions:\n");
-      //printQuestion(ans[ind]);
-      strncpy(ans[ind], que, MAXCHAR);
-      ind++;
-    }
-    */
     // places line in correct slot of array
     for (int j = 0; j<n; j++){
       if (num_arr[j] == i){
@@ -100,28 +78,7 @@ char ** getNQuestions(char *filename, int n){
   }
   fclose(fp);
 
-  /*
-  printf("num_arr: [");
-  for (int ind = 0; ind<n; ind++){
-    printf(" %s,", ans[ind]);
-  }
-  printf("]\n");
-  */
   return ans;
-}
-
-// selection sorts an int array
-void soort(int arr[], int n) {
-  int a, i, j;
-  for (i = 0; i < n; ++i) {
-    for (j = i + 1; j < n; ++j) {
-      if (arr[i] > arr[j]) {
-        a =  arr[i];
-        arr[i] = arr[j];
-        arr[j] = a;
-      }
-    }
-  }
 }
 
 void printQuestions(char ** q, int n){
@@ -153,12 +110,3 @@ int getMaxQuestions(char * filename){
   fclose(fp);
   return file_length;
 }
-
-/*
-int main() {
-  char *f = "questions.txt";
-  int n = 3;
-  char ** q = getNQuestions(f, n);
-  printQuestions(q);
-}
-*/

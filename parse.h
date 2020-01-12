@@ -23,7 +23,6 @@ struct question {
 };
 
 struct question parseSingleQuestion(char *line);
-void soort(int arr[], int n);
 char ** getNQuestions(char *filename, int n);
 void printQuestions(char ** q, int n);
 void printQuestion(struct question q);

@@ -64,3 +64,6 @@ Algorithms:
 
 ### 1/9/2020
 - Jeffrey: finished debugging single.c
+
+### 1/10/2020
+- Jeffrey: started writing sorting for leaderboard

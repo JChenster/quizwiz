@@ -192,6 +192,7 @@ int updateLeaderboard(char * username, int score){
     // closes file and reopens semaphore
     fclose(fp);
   }
+  close(fd);
   int e = remove("leaderboard.txt");
   if (e != 0){
     printf("error %d: %s\n", errno, strerror(errno));

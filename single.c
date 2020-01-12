@@ -116,7 +116,7 @@ int viewLeaderboard(){
 }
 
 int updateLeaderboard(char * username, int score){
-  printf("trying to get in\n");
+  // printf("trying to get in\n");
   semd = semget(SEMKEY, 1, 0);
   if (semd == -1) {
     printf("error %d: %s\n", errno, strerror(errno));
@@ -160,50 +160,47 @@ int updateLeaderboard(char * username, int score){
 
     char * entry;
     char delim[] = "\t\t";
-    printf("got here part 2\n");
+    int last = 1;
+
     for (int i = 0; i < file_length; i++) {
       // obtains username and score of player line by line
       entry = fgets(textqs, MAXCHAR, fp);
-      printf("got here part 3\n");
       char temp[MAXCHAR];
-      printf("got here part 4\n");
       strncpy(temp, entry, MAXCHAR);
-      printf("got here part 5\n");
       char cur_user[16];
-      printf("got here part 6\n");
       strncpy(cur_user, strtok(temp, delim), 16);
-      printf("got here part 7\n");
       int cur_score = atoi(strtok(0, delim));
-      printf("%s : %d\n", cur_user, cur_score);
+      //printf("%s : %d\n", cur_user, cur_score);
 
       // if score to add is greater than current score
       if (score > cur_score){
         char new[100];
         int written = sprintf(new, "%s\t\t%d\n", username, score);
         write(fd, new, written);
+        last = 0;
       }
       char new[100];
       int written = sprintf(new, "%s\t\t%d\n", cur_user, cur_score);
       write(fd, new, written);
     }
+    if (last){
+      char new[100];
+      int written = sprintf(new, "%s\t\t%d\n", username, score);
+      write(fd, new, written);
+    }
 
-    /*
-    int fd = open("leaderboard.txt", O_WRONLY | O_APPEND);
-    char new[100];
-    int written = sprintf(new, "%s\t\t%d\n", username, score);
-    write(fd, new, written);
-    close(fd);
-    */
-
-    // closes file and reopens semaphore
     fclose(fp);
   }
+
+  // close temp.txt and remove leaderboard.txt
   close(fd);
   int e = remove("leaderboard.txt");
   if (e != 0){
     printf("error %d: %s\n", errno, strerror(errno));
     return -1;
   }
+
+  // rename temp.txt to leaderboard.txt
   e = rename("temp.txt", "leaderboard.txt");
   if (e != 0){
     printf("error %d: %s\n", errno, strerror(errno));

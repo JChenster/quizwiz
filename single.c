@@ -160,7 +160,6 @@ int updateLeaderboard(char * username, int score){
 
     char * entry;
     char delim[] = "\t\t";
-    char * cur_user;
     printf("got here part 2\n");
     for (int i = 0; i < file_length; i++) {
       // obtains username and score of player line by line
@@ -170,12 +169,10 @@ int updateLeaderboard(char * username, int score){
       printf("got here part 4\n");
       strncpy(temp, entry, MAXCHAR);
       printf("got here part 5\n");
-      char temp2[16];
+      char cur_user[16];
       printf("got here part 6\n");
-      strncpy(temp2, strtok(temp, delim), 16);
+      strncpy(cur_user, strtok(temp, delim), 16);
       printf("got here part 7\n");
-      strncpy(cur_user, temp2, 16);
-      printf("got here part 8\n");
       int cur_score = atoi(strtok(0, delim));
       printf("%s : %d\n", cur_user, cur_score);
 

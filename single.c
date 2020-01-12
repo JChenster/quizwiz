@@ -165,11 +165,17 @@ int updateLeaderboard(char * username, int score){
     for (int i = 0; i < file_length; i++) {
       // obtains username and score of player line by line
       entry = fgets(textqs, MAXCHAR, fp);
+      printf("got here part 3\n");
       char temp[MAXCHAR];
+      printf("got here part 4\n");
       strncpy(temp, entry, MAXCHAR);
+      printf("got here part 5\n");
       char temp2[16];
+      printf("got here part 6\n");
       strncpy(temp2, strtok(temp, delim), 16);
+      printf("got here part 7\n");
       strncpy(cur_user, temp2, 16);
+      printf("got here part 8\n");
       int cur_score = atoi(strtok(0, delim));
       printf("%s : %d\n", cur_user, cur_score);
 

@@ -26,7 +26,7 @@ int main(){
   fgets(input, 8, stdin);
   int n = atoi(input);
   int score = game(n);
-  //resetLeaderboard();
+  resetLeaderboard();
   viewLeaderboard();
   updateLeaderboard(username, score);
   viewLeaderboard();
@@ -124,42 +124,85 @@ int updateLeaderboard(char * username, int score){
   }
   semop(semd, &sb, 1);
 
-  char * filename = "leaderboard.txt";
-  int file_length = getMaxQuestions(filename);
+  // creating temp file
+  int fd = open("temp.txt", O_CREAT | O_TRUNC | O_RDWR, 0644);
+  if (fd == -1){
+    printf("error %d: %s\n", errno, strerror(errno));
+    return -1;
+  }
+  close(fd);
 
-  // opens file
-  FILE *fp;
-  char textqs[MAXCHAR];
-  fp = fopen(filename, "r");
-  if (fp == NULL) {
-    printf("Could not open file %s", filename);
+  // opening temp for writing
+  fd = open("temp.txt", O_WRONLY | O_APPEND);
+  if (fd == -1){
+    printf("error %d: %s\n", errno, strerror(errno));
     return -1;
   }
 
-  char * entry;
-  char delim[] = "\t\t";
-  char * cur_user;
-  for (int i = 0; i < file_length; i++) {
-    entry = fgets(textqs, MAXCHAR, fp);
-    char temp[MAXCHAR];
-    strncpy(temp, entry, MAXCHAR);
-    char temp2[16];
-    strncpy(temp2, strtok(temp, delim), 16);
-    strncpy(cur_user, temp2, 16);
-    int cur_score = atoi(strtok(0, delim));
-    printf("cur user: %s\ncur score: %d\n", cur_user, cur_score);
+  char * filename = "leaderboard.txt";
+  int file_length = getMaxQuestions(filename);
+
+  if (file_length == 0){
+    char new[100];
+    int written = sprintf(new, "%s\t\t%d\n", username, score);
+    write(fd, new, written);
+  }
+  else{
+    // opens file
+    FILE *fp;
+    char textqs[MAXCHAR];
+    fp = fopen(filename, "r");
+    if (fp == NULL) {
+      printf("Could not open file %s", filename);
+      return -1;
+    }
+
+    char * entry;
+    char delim[] = "\t\t";
+    char * cur_user;
+    for (int i = 0; i < file_length; i++) {
+      // obtains username and score of player line by line
+      entry = fgets(textqs, MAXCHAR, fp);
+      char temp[MAXCHAR];
+      strncpy(temp, entry, MAXCHAR);
+      char temp2[16];
+      strncpy(temp2, strtok(temp, delim), 16);
+      strncpy(cur_user, temp2, 16);
+      int cur_score = atoi(strtok(0, delim));
+
+      // if score to add is greater than current score
+      if (score > cur_score){
+        char new[100];
+        int written = sprintf(new, "%s\t\t%d\n", username, score);
+        write(fd, new, written);
+      }
+      char new[100];
+      int written = sprintf(new, "%s\t\t%d\n", cur_user, cur_score);
+      write(fd, new, written);
+    }
+
+    /*
+    int fd = open("leaderboard.txt", O_WRONLY | O_APPEND);
+    char new[100];
+    int written = sprintf(new, "%s\t\t%d\n", username, score);
+    write(fd, new, written);
+    close(fd);
+    */
+
+    // closes file and reopens semaphore
+    fclose(fp);
+  }
+  int e = remove("leaderboard.txt");
+  if (e != 0){
+    printf("error %d: %s\n", errno, strerror(errno));
+    return -1;
+  }
+  e = rename("temp.txt", "leaderboard.txt");
+  if (e != 0){
+    printf("error %d: %s\n", errno, strerror(errno));
+    return -1;
   }
 
-  /*
-  int fd = open("leaderboard.txt", O_WRONLY | O_APPEND);
-  char new[100];
-  int written = sprintf(new, "%s\t\t%d\n", username, score);
-  write(fd, new, written);
-  close(fd);
-  */
-
-  // closes file and reopens semaphore
-  fclose(fp);
   sb.sem_op = 1;
   semop(semd, &sb, 1);
   return 0;
@@ -167,7 +210,11 @@ int updateLeaderboard(char * username, int score){
 
 int resetLeaderboard(){
   printf("Resetting leaderboard...\n");
-  remove("leaderboard.txt");
+  int e = remove("leaderboard.txt");
+  if (e != 0){
+    printf("error %d: %s\n", errno, strerror(errno));
+    return -1;
+  }
   int fd = open("leaderboard.txt", O_CREAT | O_TRUNC | O_RDWR, 0644);
   if (fd == -1){
     printf("error %d: %s\n", errno, strerror(errno));

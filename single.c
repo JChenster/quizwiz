@@ -26,7 +26,7 @@ int main(){
   fgets(input, 8, stdin);
   int n = atoi(input);
   int score = game(n);
-  resetLeaderboard();
+  //resetLeaderboard();
   viewLeaderboard();
   updateLeaderboard(username, score);
   viewLeaderboard();

@@ -125,15 +125,7 @@ int updateLeaderboard(char * username, int score){
   semop(semd, &sb, 1);
 
   // creating temp file
-  int fd = open("temp.txt", O_CREAT | O_TRUNC | O_RDWR, 0644);
-  if (fd == -1){
-    printf("error %d: %s\n", errno, strerror(errno));
-    return -1;
-  }
-  close(fd);
-
-  // opening temp for writing
-  fd = open("temp.txt", O_WRONLY | O_APPEND);
+  int fd = open("temp.txt", O_CREAT | O_TRUNC | O_WRONLY | O_APPEND, 0644);
   if (fd == -1){
     printf("error %d: %s\n", errno, strerror(errno));
     return -1;

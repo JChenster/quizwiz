@@ -20,16 +20,22 @@ int main(){
   createSemaphore();
 
   // receive input of number of questions desired
-  printf("There are currently %d questions in the database\n", getMaxQuestions(f));
+  int databaseMax = getMaxQuestions(f);
+  printf("There are currently %d questions in the database\n", databaseMax);
   printf("Enter number of questions desired: ");
   char input[8];
   fgets(input, 8, stdin);
   int n = atoi(input);
+  if (n > databaseMax){
+    printf("That's more questions than the database has!\n");
+    return -1;
+  }
   int score = singleGame(n);
 
   updateLeaderboard(username, score);
   viewLeaderboard();
   removeSemaphore();
+  return 0;
 }
 
 int singleGame(int n){

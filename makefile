@@ -1,5 +1,8 @@
-all: single.o parse.o
-	gcc -o program single.o parse.o
+all: single.o parse.o interface.o
+	gcc -o program single.o parse.o interface.o
+
+interface.o: interface.c interface.h
+	gcc -c interface.c
 
 single.o: single.c single.h
 	gcc -c single.c

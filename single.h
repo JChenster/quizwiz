@@ -25,7 +25,7 @@ union semun {
                               (Linux-specific) */
 };
 
-int game(int n);
+void singleGame();
 int createSemaphore();
 int removeSemaphore();
 int viewLeaderboard();

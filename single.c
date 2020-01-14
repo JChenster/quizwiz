@@ -1,7 +1,7 @@
 #include "single.h"
 #include "parse.h"
 
-int main(){
+void singleGame(){
   printf("-----------------------------------------\n");
   printf("Welcome to the single player QuizWiz mode!\n");
   printf("-----------------------------------------\n");
@@ -25,15 +25,8 @@ int main(){
   char input[8];
   fgets(input, 8, stdin);
   int n = atoi(input);
-  int score = game(n);
-  //resetLeaderboard();
-  //viewLeaderboard();
-  updateLeaderboard(username, score);
-  viewLeaderboard();
-  removeSemaphore();
-}
 
-int game(int n){
+  // runs game
   char ** q = getNQuestions(f, n);
   int response;
   int score = 0;
@@ -58,7 +51,10 @@ int game(int n){
       break;
     }
   }
-  return score;
+
+  updateLeaderboard(username, score);
+  viewLeaderboard();
+  removeSemaphore();
 }
 
 int createSemaphore(){

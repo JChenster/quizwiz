@@ -60,6 +60,7 @@ int singleGame(int n){
       break;
     }
   }
+  return score;
 }
 
 int createSemaphore(){

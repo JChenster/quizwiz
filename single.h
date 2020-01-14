@@ -14,7 +14,7 @@
 int semd;
 struct sembuf sb;
 union semun us;
-char username[16];
+
 char * f = "questions.txt";
 
 union semun {
@@ -25,7 +25,6 @@ union semun {
                               (Linux-specific) */
 };
 
-int singleMain();
 int singleGame(int n);
 int createSemaphore();
 int removeSemaphore();

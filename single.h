@@ -10,21 +10,6 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#define SEMKEY 24601
-int semd;
-struct sembuf sb;
-union semun us;
-char username[16];
-char * f = "questions.txt";
-
-union semun {
-  int              val;    /* Value for SETVAL */
-  struct semid_ds *buf;    /* Buffer for IPC_STAT, IPC_SET */
-  unsigned short  *array;  /* Array for GETALL, SETALL */
-  struct seminfo  *__buf;  /* Buffer for IPC_INFO
-                              (Linux-specific) */
-};
-
 void singleGame();
 int createSemaphore();
 int removeSemaphore();

@@ -26,10 +26,6 @@ int main(){
   char input[8];
   fgets(input, 8, stdin);
   int n = atoi(input);
-  if (n > databaseMax){
-    printf("That's more questions than the database has!\n");
-    return -1;
-  }
   int score = singleGame(n);
 
   updateLeaderboard(username, score);

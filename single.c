@@ -1,6 +1,10 @@
 #include "single.h"
 #include "parse.h"
 
+int main(){
+  singleGame();
+}
+
 void singleGame(){
   printf("-----------------------------------------\n");
   printf("Welcome to the single player QuizWiz mode!\n");

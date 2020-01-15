@@ -1,7 +1,7 @@
-all: main.o single.o parse.o
-	gcc -o program single.o parse.o
+all: main.o single.o multi.o parse.o
+	gcc -o program single.o multi.o parse.o 
 
-main.o: main.c single.h parse.h
+main.o: main.c single.h multi.h parse.h
 	gcc -c main.c
 
 single.o: single.c single.h

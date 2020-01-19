@@ -188,7 +188,3 @@ int resetLeaderboard(){
   printf("Success!\n");
   return 0;
 }
-
-int main() {
-
-}

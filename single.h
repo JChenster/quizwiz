@@ -15,8 +15,6 @@ int semd;
 struct sembuf sb;
 union semun us;
 
-char * f = "questions.txt";
-
 union semun {
   int              val;    /* Value for SETVAL */
   struct semid_ds *buf;    /* Buffer for IPC_STAT, IPC_SET */

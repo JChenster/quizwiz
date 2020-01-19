@@ -14,6 +14,8 @@
 #include "parse.h"
 
 int main() {
+  char * f = "questions.txt";
+
   printf("-----------------------------------------\n");
   printf("Welcome to the single player QuizWiz mode!\n");
   printf("-----------------------------------------\n");

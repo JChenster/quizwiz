@@ -40,7 +40,7 @@ int main() {
   char input[8];
   fgets(input, 8, stdin);
   int n = atoi(input);
-  int score = singleGame(n);
+  int score = singleGame(f, n);
 
   updateLeaderboard(username, score);
   viewLeaderboard();

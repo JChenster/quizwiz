@@ -23,7 +23,7 @@ union semun {
                               (Linux-specific) */
 };
 
-int singleGame(int n);
+int singleGame(char * filename, int n);
 int createSemaphore();
 int removeSemaphore();
 int viewLeaderboard();

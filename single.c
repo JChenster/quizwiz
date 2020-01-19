@@ -1,7 +1,7 @@
 #include "single.h"
 #include "parse.h"
 
-int singleGame(int n){
+int singleGame(char* filename, int n){
   // runs game
   char ** q = getNQuestions(f, n);
   int response;

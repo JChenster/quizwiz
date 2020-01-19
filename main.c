@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include "single.h"
+#include "multi.h"
 #include "parse.h"
 
 int main() {

@@ -56,4 +56,8 @@ int main() {
   removeSemaphore();
   }
   return 0;
+  if ('M' == mode || 'm' == mode){
+    while ( ( mode = getchar() ) != '\n' && mode != EOF )
+      ;
+  }
 }

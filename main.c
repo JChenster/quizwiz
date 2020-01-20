@@ -13,6 +13,32 @@
 #include "multi.h"
 #include "parse.h"
 
+#define NUMPLAYERSKEY 555222
+#define TURNSKEY 444222
+
+int removeSegs(){
+  int shmd;
+  // removing shared memory segments                                                                                                                                               
+    shmd = shmget(NUMPLAYERSKEY, 64, 0);
+    if (shmd == -1){
+      printf("error %d: %s\n", errno, strerror(errno));
+      return -1;
+    }
+    shmctl(shmd, IPC_RMID, 0);
+    printf("shared memory for num players removed\n");
+
+
+    shmd = shmget(TURNSKEY, 64, 0);
+    if (shmd == -1){
+      printf("error %d: %s\n", errno, strerror(errno));
+      return -1;
+    }
+    shmctl(shmd, IPC_RMID, 0);
+    printf("shared memory for turns removed\n");
+    return 0;
+}
+
+
 int main() {
   printf("------------------------------------------------------------\n");
   printf("Welcome to QuizWiz!\n");
@@ -55,9 +81,80 @@ int main() {
   viewLeaderboard();
   removeSemaphore();
   }
-  return 0;
   if ('M' == mode || 'm' == mode){
     while ( ( mode = getchar() ) != '\n' && mode != EOF )
       ;
+
+    // creating shared memory segment
+    int shmd;
+    shmd = shmget(NUMPLAYERSKEY, 64, IPC_CREAT | 0644);
+    if (shmd == -1){
+      printf("insert error msg\n");
+      return -1;
+    }
+    printf("shared memory for number of players created\n");
+
+    // adjust number of players
+    printf("shmget id is %d\n", shmd);
+    int * numPlayers = shmat(shmd, 0, 0);
+    printf("Players before entrance: %d\n", * numPlayers);
+    int playerNum = * numPlayers;
+    (* numPlayers)++;
+    printf("Now there are %d players\n", * numPlayers);
+    shmdt(numPlayers);
+    
+    shmd = shmget(TURNSKEY, 64, IPC_CREAT | 0644);
+    if (shmd == -1){
+      printf("error %d: %s\n", errno, strerror(errno));
+      return -1;
+    }
+    printf("shared memory for turns created\n");
+
+    printf("I am the %dth player\n", playerNum);
+    //removeSegs();
+    /*
+    // removing shared memory segments
+    shmd = shmget(NUMPLAYERSKEY, 64, 0);
+    if (shmd == -1){
+      printf("error %d: %s\n", errno, strerror(errno));
+      return -1;
+    }
+    shmctl(shmd, IPC_RMID, 0);
+    printf("shared memory for num players removed\n");
+
+
+    shmd = shmget(TURNSKEY, 64, 0);
+    if (shmd == -1){
+      printf("error %d: %s\n", errno, strerror(errno));
+      return -1;
+    }
+    shmctl(shmd, IPC_RMID, 0);
+    printf("shared memory for turns removed\n");
+    */
   }
+  
+  return 0;
 }
+/*
+int removeSegs(){
+  int shmd;
+  // removing shared memory segments                                                                                                                                             
+    shmd = shmget(NUMPLAYERSKEY, 64, 0);
+    if (shmd == -1){
+      printf("error %d: %s\n", errno, strerror(errno));
+      return -1;
+    }
+    shmctl(shmd, IPC_RMID, 0);
+    printf("shared memory for num players removed\n");
+
+
+    shmd = shmget(TURNSKEY, 64, 0);
+    if (shmd == -1){
+      printf("error %d: %s\n", errno, strerror(errno));
+      return -1;
+    }
+    shmctl(shmd, IPC_RMID, 0);
+    printf("shared memory for turns removed\n");
+    return 0;
+}
+*/

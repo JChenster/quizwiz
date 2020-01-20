@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#define SEMKEY 24601
+#define SEMKEY 345101
 int semd;
 struct sembuf sb;
 union semun us;
@@ -23,7 +23,7 @@ union semun {
                               (Linux-specific) */
 };
 
-int singleGame(char * filename, int n);
+int singleGame(char* f, int n);;
 int createSemaphore();
 int removeSemaphore();
 int viewLeaderboard();

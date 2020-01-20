@@ -14,12 +14,21 @@
 #include "parse.h"
 
 int main() {
+  printf("------------------------------------------------------------\n");
+  printf("Welcome to QuizWiz!\n");
+  printf("Press 'S' for single player mode OR 'M' for multiplayer mode\n");
+  printf("------------------------------------------------------------\n");
+  int mode = getchar();
   char * f = "questions.txt";
-
+  
+  if ('S' == mode || 's' == mode){
+  while ( ( mode = getchar() ) != '\n' && mode != EOF )
+    ;
   printf("-----------------------------------------\n");
   printf("Welcome to the single player QuizWiz mode!\n");
   printf("-----------------------------------------\n");
 
+  
   // Receive username
   char username[16];
   printf("Enter username: ");
@@ -45,5 +54,6 @@ int main() {
   updateLeaderboard(username, score);
   viewLeaderboard();
   removeSemaphore();
+  }
   return 0;
 }

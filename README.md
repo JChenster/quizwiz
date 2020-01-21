@@ -13,10 +13,10 @@ QuizWiz is a multiple choice trivia game that has both a single player and a two
 In the opening menu, players have a choice between the single player and a two player mode. They can also check the leaderboard for the single player mode. In the single player mode, they keep answering questions until they get one wrong. In the two player mode, the two players each answer the same questions with them taking turns answering them one at a time. Then after a certain number of questions as entered by the first player, it displays the winner of the game.
 
 ## Project usage:
-Upon starting the game, you will be asked whether you want to play single player or multiplayer. Simply press 's' or 'S' to start single player, and 'm'/'M' to start multiplayer.
+Upon starting the game, you will be asked whether you want to play single player or multiplayer. Simply press 's' or 'S' to start single player, and 'm'/'M' to start multiplayer. Just answer the questions on your command prompt by typing in the answer choices: a, b, c, or d (capitalization doesn't matter).
 
 ### Single player
-Just answer the questions on your command prompt by typing in the answer choices: a, b, c, or d (capitalization doesn't matter) and hit enter!
+Enter number of questions desired and the game will ask up to that many of questions until you get one wrong. The leaderboard will then be updated and it will be displayed.
 
 ### Multi player
 This works for two players. This requires you (and your friend) to ssh into one of the computers at homer.stuy.edu. Once you both are connected, you both need to run the program at the same time. Once this happens, player #1 (the first player to enter multiplayer mode) will enter the number of questions both will answer. Then, the two players answer questions in the same fashion as in single player; the only difference being that new questions will not appear until the other player has answered their question ie. player #1 will answer question #1 while player #2 waits and then once player #1 answers, player #1 waits for player #2 to answer the same question before moving on to the next question. 
@@ -24,7 +24,7 @@ This works for two players. This requires you (and your friend) to ssh into one 
 ## Required libraries:
 None!
 
-## Important citations and things:
-- Please do not just end the program by interrupting! It messes up the shared memory. Just play through the game....
-
-- If it is allowed, please pull later; there are some additional features that haven't been pushed (and a 4th idea of this class) that we really want to showcase :)
+## Other information:
+Bugs:
+- Error if the user enters a number of questions that exceeds the amount in the database (questions.txt)
+- Multiplayer only works for 2 players

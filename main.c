@@ -17,7 +17,7 @@ int main() {
   printf("------------------------------------------------------------\n");
   printf("\t\tWelcome to QuizWiz!\n");
   printf("Press 'S' for single player mode OR 'M' for multiplayer mode\n");
-  printf("OR 'L' to view the leaderboard");
+  printf("OR 'L' to view the leaderboard\n");
   printf("------------------------------------------------------------\n");
   int mode = getchar();
   char * f = "questions.txt";

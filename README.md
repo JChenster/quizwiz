@@ -26,5 +26,4 @@ None!
 
 ## Other information:
 Bugs:
-- Error if the user enters a number of questions that exceeds the amount in the database (questions.txt)
-- Multiplayer only works for 2 players
+- There's an error if the user enters a number of questions that exceeds the amount in the database (questions.txt)

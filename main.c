@@ -190,4 +190,5 @@ int main() {
       removeSegs();
     }
     return 0;
+  }
 }

@@ -6,7 +6,7 @@ Period 5
 
 ## Project Description:
 
-QuizWiz is a multiple choice trivia game that has both a single player and a two player mode. In the single player mode, the player tries to answer as many questions correctly, attempting to climb the leaderboard. In the two player mode, each player (on a different process) plays the quiz game together. The game waits until each player has submitted their response to reveal the answer, what each player chose, and move on to the next question. The player with the most amount of points at the end of the game wins.
+QuizWiz is a multiple choice trivia game that has both a single player and a two player mode. In the single player mode, the player tries to answer as many questions as they wish, attempting to climb the leaderboard. In the two player mode, each player plays the quiz game together with the same questions. The game waits on each player to submit their answer before displaying the next question to the other player. The player with the most amount of points at the end of the game wins!
 
 ## User Interface:
 
@@ -25,4 +25,6 @@ This requires you (and your friend) to ssh into one of the computers at homer.st
 None!
 
 ## Important citations and things:
-Please do not just end the program by interrupting! It messes up the shared memory. Just play through the game....
+- Please do not just end the program by interrupting! It messes up the shared memory. Just play through the game....
+
+- If it is allowed, please pull later; there are some additional features that haven't been pushed (and a 4th idea of this class) that we really want to showcase :)

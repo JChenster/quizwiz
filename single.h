@@ -9,6 +9,7 @@
 #include <sys/shm.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <time.h>
 
 #define SEMKEY 345101
 int semd;

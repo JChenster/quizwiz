@@ -62,16 +62,17 @@ int viewLeaderboard(){
   }
   printf("Leaderboard:\n");
 
-  /*
+  
   struct stat md;
   stat("leaderboard.txt", &md);
   char temp[8];
   sprintf(temp, "%ld", md.st_size);
   int size = atoi(temp);
-  printf("size: %d\n", size);
-  */
+  printf("size of leaderboard: %dB\n", size);
+  printf("Leaderboard last modified: %s", ctime(&md.st_atime));
+  
   // reads the contents of the file
-  int size = 1000;
+  // int size = 1000;
   char buff[size];
   read(fd, buff, size);
 

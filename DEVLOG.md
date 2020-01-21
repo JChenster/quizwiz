@@ -31,3 +31,6 @@
 
 ### 1/20/2020
 - Jeffrey + Vincent: pair programmed all of multiplayer
+
+### 1/21/2020
+- Jeffrey + Vincent: pair programmed final touches on multiplayer and stat for viewing leaderboard

@@ -27,3 +27,6 @@ None!
 ## Other information:
 Bugs:
 - There's an error if the user enters a number of questions that exceeds the amount in the database (questions.txt)
+
+Misc:
+- We are now using allocating memory and finding information about files instead of pipes.

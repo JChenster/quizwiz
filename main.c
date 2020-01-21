@@ -103,7 +103,7 @@ int main() {
     printf("shared memory for number of players created\n");
 
     // update num of players accordingly
-    printf("shmget id is %d\n", players_shmd);
+    //printf("shmget id is %d\n", players_shmd);
     int * numPlayers = shmat(players_shmd, 0, 0);
     printf("Players before entrance: %d\n", * numPlayers);
     int playerNum = * numPlayers;
@@ -122,26 +122,26 @@ int main() {
 
     // created shared mem for questions
     int qWanted = 5;
-    int q_shmd = shmget(QUESTIONSKEY, 260 * qWanted, IPC_CREAT | 0644);
+    int q_shmd = shmget(QUESTIONSKEY, 260, IPC_CREAT | 0644);
+    printf("the value of q_shmd is %d\n", q_shmd);
     if (q_shmd == -1){
       printf("error %d: %s\n", errno, strerror(errno));
       return -1;
     }
 
-    char *** questionBank;
     // initialize question bank
+    char ** questionBank;
     if (playerNum == 0){
-      questionBank = shmat(q_shmd, 0, 0);
-      * (questionBank) = getNQuestions(f, qWanted);
-      shmdt(questionBank);
-    }
+      questionBank = getNQuestions(f, qWanted);
+      printf("initialized question bank\n");
+    } 
 
-    questionBank = shmat(q_shmd, 0, 0);
- 
     // run turns
     int * curTurns;
     int response;
     int score = 0;
+    struct question q;
+    //char cur[128];
     while (1){
       curTurns = shmat(turns_shmd, 0, 0);
       //printf("it is currently turn %d\n", * curTurns);
@@ -149,9 +149,21 @@ int main() {
 	// Your turn
 	if (* curTurns % 2 == playerNum){
 	  printf("it's your turn cuz its turn %d\n", * curTurns);
-	  /*
-	  char * cur = (*questionBank)[*curTurns / 2];
-	  struct question q = parseSingleQuestion(cur);
+	  
+	  if (*curTurns % 2 == 0){
+	    char * curQue = questionBank[*curTurns / 2];
+	    char * cur = shmat(q_shmd, 0, 0);
+	    strncpy(cur, curQue, 260);
+	    shmdt(cur);
+	    q = parseSingleQuestion(curQue);
+	  }
+	  else{
+	    char * cur = shmat(q_shmd, 0, 0);
+	    q = parseSingleQuestion(cur);
+	    shmdt(cur);
+	  }
+	  //struct question q = parseSingleQuestion(cur);
+
 	  printf("-----------------------------------\n");
 	  printf("%d. %s\nA. %s\nB. %s\nC. %s\nD. %s\n", (*curTurns / 2) + 1, q.question, q.a, q.b, q.c, q.d);
 	  printf("-----------------------------------\n");
@@ -168,23 +180,23 @@ int main() {
 	  }
 	  while ( ( response = getchar() ) != '\n' && response != EOF )
 	    ;
-	  */
-	  sleep(1);
-	  (* curTurns)++;
+	  
+	  //sleep(1);
+	  (*curTurns)++;
+	  
 	}
+	shmdt(curTurns);
       }
       else{
+	shmdt(curTurns);
 	break;
       }
-      shmdt(curTurns);
     
     }
-
-    shmdt(questionBank);
-    //printf("Your final score is %d\n", score); 
-    
-      
-    //removeSegs();
+    printf("Your final score is %d\n", score);
+    if (playerNum == 0){
+      removeSegs();
+    }
     /*
     // removing shared memory segments
     shmd = shmget(NUMPLAYERSKEY, 64, 0);

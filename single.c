@@ -31,22 +31,24 @@ int singleGame(char* f, int n){
 }
 
 int createSemaphore(){
-  semd = semget(SEMKEY, 1, IPC_CREAT | IPC_EXCL | 0644);
+  int semd = semget(SEMKEY, 1, IPC_CREAT | IPC_EXCL | 0644);
   if (semd == -1) {
     printf("error %d: %s\n", errno, strerror(errno));
     return -1;
   }
+  union semun us;
   semctl(semd, 0, SETVAL, us);
   printf("semaphore created\n");
   return 0;
 }
 
 int removeSemaphore(){
-  semd = semget(SEMKEY, 1, 0);
+  int semd = semget(SEMKEY, 1, 0);
   if (semd == -1) {
     printf("error %d: %s\n", errno, strerror(errno));
     return -1;
   }
+  struct sembuf sb;
   semop(semd, &sb, 1);
   semctl(semd, IPC_RMID, 0);
   printf("semaphore removed\n");
@@ -87,11 +89,12 @@ int viewLeaderboard(){
 
 int updateLeaderboard(char * username, int score){
   // printf("trying to get in\n");
-  semd = semget(SEMKEY, 1, 0);
+  int semd = semget(SEMKEY, 1, 0);
   if (semd == -1) {
     printf("error %d: %s\n", errno, strerror(errno));
     return -1;
   }
+  struct sembuf sb;
   semop(semd, &sb, 1);
 
   // creating temp file

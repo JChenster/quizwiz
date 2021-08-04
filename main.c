@@ -39,7 +39,9 @@ int main() {
     printf("Welcome %s!\n", username);
 
     // Sets up semaphores
+    union semun us;
     us.val = 1;
+    struct sembuf sb;
     sb.sem_num = 0;
     sb.sem_op = -1;
     createSemaphore();

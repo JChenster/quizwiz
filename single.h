@@ -12,9 +12,9 @@
 #include <time.h>
 
 #define SEMKEY 345101
-int semd;
-struct sembuf sb;
-union semun us;
+extern int semd;
+extern struct sembuf sb;
+extern union semun us;
 
 union semun {
   int              val;    /* Value for SETVAL */
